@@ -1,0 +1,21 @@
+{
+  "__schemaVersion": 2,
+  "books": [
+    {
+      "id": "book_default",
+      "name": "默认账本",
+      "icon": "📒",
+      "color": "#ff8fb3"
+    }
+  ],
+  "currentBookId": "book_default",
+  "currentBgIndex": 0,
+  "transactions": [],
+  "accounts": [],
+  "budgets": [],
+  "goals": [],
+  "loans": [],
+  "templates": [],
+  "recurring": [],
+  "mortgageLoans": []
+}
