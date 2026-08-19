@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="creative-medium" content="interactive-prototype" />
+  <title>喵账 · 记账工作台</title>
+  <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=ZCOOL+KuaiLe&family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://sf3-scmcdn-cn.feishucdn.com/obj/feishu-static/miaoda/coding-unpkg-sdk/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://sf3-scmcdn-cn.feishucdn.com/obj/feishu-static/miaoda/coding-unpkg-sdk/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://sf3-scmcdn-cn.feishucdn.com/obj/feishu-static/miaoda/coding-unpkg-sdk/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script src="https://sf3-scmcdn-cn.feishucdn.com/obj/feishu-static/miaoda/coding-unpkg-sdk/echarts@5.6.0/dist/echarts.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="bg-layer" class="bg-layer"></div>
+  <div id="bg-overlay" class="bg-overlay"></div>
+  <div id="root"></div>
+  <script type="text/babel" src="data.jsx"></script>
+  <script type="text/babel" src="cloudsync.jsx"></script>
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel" src="modules1.jsx"></script>
+  <script type="text/babel" src="modules2.jsx"></script>
+  <script type="text/babel" src="modules3.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+  <script>
+    function announceUpgrade() {
+      try { window.parent.postMessage({ type: 'miaoda:upgrade:available', kind: 'interactive-prototype' }, '*'); } catch (e) {}
+    }
+    announceUpgrade();
+    if (document.readyState !== 'complete') window.addEventListener('load', announceUpgrade, { once: true });
+  </script>
+</body>
+</html>
