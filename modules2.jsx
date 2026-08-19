@@ -1336,6 +1336,7 @@ function SettingsModule({ refresh, onBgChange, bgCount }) {
   const [cloudToken, setCloudToken] = React.useState('');
   const [cloudOwner, setCloudOwner] = React.useState('');
   const [cloudRepo, setCloudRepo] = React.useState('');
+  const [cloudUserId, setCloudUserId] = React.useState('');
   const [showAdvanced, setShowAdvanced] = React.useState(false);
   const [syncLoading, setSyncLoading] = React.useState(false);
   const [syncMsg, setSyncMsg] = React.useState('');
@@ -1350,6 +1351,7 @@ function SettingsModule({ refresh, onBgChange, bgCount }) {
     setCloudToken(cfg.token || '');
     setCloudOwner(cfg.owner || '');
     setCloudRepo(cfg.repo || '');
+    setCloudUserId(cfg.userId || '');
     setLastSync(getLastSync());
   }, []);
 
@@ -1368,7 +1370,7 @@ function SettingsModule({ refresh, onBgChange, bgCount }) {
   };
 
   const handleSaveConfig = () => {
-    saveCloudConfig({ token: cloudToken, owner: cloudOwner, repo: cloudRepo });
+    saveCloudConfig({ token: cloudToken, owner: cloudOwner, repo: cloudRepo, userId: cloudUserId });
     showMsg('✅ 配置已保存', 'success');
   };
 
@@ -1439,6 +1441,27 @@ function SettingsModule({ refresh, onBgChange, bgCount }) {
               background: '#fff', boxSizing: 'border-box', outline: 'none',
             }}
           />
+        </div>
+
+        {/* 用户标识（多人共用仓库时区分数据） */}
+        <div style={{ marginBottom: '10px' }}>
+          <label style={{ fontSize: '12px', color: 'var(--text-sub)', display: 'block', marginBottom: '4px' }}>
+            👤 用户标识（多人共用时必填，如：小明、小红）
+          </label>
+          <input
+            type="text"
+            placeholder="输入你的昵称，如：xiaoming"
+            value={cloudUserId}
+            onChange={(e) => setCloudUserId(e.target.value)}
+            style={{
+              width: '100%', padding: '10px 12px', borderRadius: '10px',
+              border: '1px solid rgba(0,0,0,0.08)', fontSize: '13px',
+              background: '#fff', boxSizing: 'border-box', outline: 'none',
+            }}
+          />
+          <div style={{ fontSize: '10px', color: 'var(--text-mute)', marginTop: '4px', lineHeight: 1.4 }}>
+            填写后，你的数据将单独存为 sync_data_{cloudUserId || '你的标识'}.json，与他人互不干扰
+          </div>
         </div>
 
         {/* 高级设置 */}
@@ -1513,7 +1536,7 @@ function SettingsModule({ refresh, onBgChange, bgCount }) {
         </div>
 
         <div style={{ marginTop: '10px', fontSize: '10px', color: 'var(--text-mute)', lineHeight: 1.5 }}>
-          💡 令牌仅保存在你本机浏览器，不会上传到任何服务器。需要 repo 权限的 Classic Token。
+          💡 令牌和用户标识仅保存在你本机浏览器。多人共用同一仓库时，各自填写不同的「用户标识」即可数据独立、互不覆盖。
         </div>
       </div>
 

@@ -1,7 +1,16 @@
 // 云同步模块 - 通过 GitHub Contents API 将数据同步到仓库
 const CLOUD_CONFIG_KEY = 'miao_cloud_config';
 const CLOUD_LAST_SYNC_KEY = 'miao_cloud_last_sync';
-const SYNC_FILENAME = 'sync_data.json';
+// 根据用户标识生成同步文件名（多人共用仓库时数据不串联）
+function getSyncFilename() {
+  const config = getCloudConfig();
+  const uid = (config.userId || '').trim();
+  if (uid) {
+    const safe = uid.replace(/[\\/:*?"<>|\s]/g, '_');
+    return `sync_data_${safe}.json`;
+  }
+  return 'sync_data.json';
+}
 
 // 默认仓库配置（可在设置中修改）
 const DEFAULT_CLOUD_CONFIG = {
@@ -9,6 +18,7 @@ const DEFAULT_CLOUD_CONFIG = {
   repo: 'miao-ledger-workbench',
   branch: 'main',
   token: '',
+  userId: '',
 };
 
 // 读取云同步配置
@@ -68,7 +78,7 @@ async function fetchCloudFile() {
   try {
     const data = await githubApi(
       'GET',
-      `/repos/${config.owner}/${config.repo}/contents/${SYNC_FILENAME}?ref=${config.branch}`
+      `/repos/${config.owner}/${config.repo}/contents/${getSyncFilename()}?ref=${config.branch}`
     );
     // content 是 base64 编码
     const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
@@ -112,7 +122,7 @@ async function uploadToCloud(onProgress) {
 
   await githubApi(
     'PUT',
-    `/repos/${config.owner}/${config.repo}/contents/${SYNC_FILENAME}`,
+    `/repos/${config.owner}/${config.repo}/contents/${getSyncFilename()}`,
     payload
   );
 
@@ -165,4 +175,5 @@ Object.assign(window, {
   uploadToCloud,
   downloadFromCloud,
   checkCloudBackup,
+  getSyncFilename,
 });
