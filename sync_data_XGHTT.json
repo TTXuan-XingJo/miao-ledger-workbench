@@ -10,8 +10,39 @@
   ],
   "currentBookId": "book_default",
   "currentBgIndex": 0,
-  "transactions": [],
-  "accounts": [],
+  "transactions": [
+    {
+      "id": "tx_mt0arvvz5bvtx",
+      "bookId": "book_default",
+      "type": "expense",
+      "category": "housing",
+      "amount": 1000,
+      "note": "",
+      "date": "2026-08-20",
+      "accountId": ""
+    },
+    {
+      "id": "tx_mt0armolc12hk",
+      "bookId": "book_default",
+      "type": "income",
+      "category": "salary",
+      "amount": 5000,
+      "note": "",
+      "date": "2026-08-20",
+      "accountId": ""
+    }
+  ],
+  "accounts": [
+    {
+      "id": "acc_mt0asf9iwj8y3",
+      "bookId": "book_default",
+      "name": "中国银行",
+      "type": "card",
+      "balance": 10000,
+      "icon": "💳",
+      "color": "#f075a0"
+    }
+  ],
   "budgets": [],
   "goals": [],
   "loans": [],
