@@ -10,7 +10,28 @@
   ],
   "currentBookId": "book_default",
   "currentBgIndex": 0,
-  "transactions": [],
+  "transactions": [
+    {
+      "id": "tx_mt0awhjl8zlbp",
+      "bookId": "book_default",
+      "type": "income",
+      "category": "salary",
+      "amount": 46469798658,
+      "note": "",
+      "date": "2026-08-20",
+      "accountId": ""
+    },
+    {
+      "id": "tx_mt0avf5oo3dar",
+      "bookId": "book_default",
+      "type": "expense",
+      "category": "housing",
+      "amount": 4686868,
+      "note": "",
+      "date": "2026-08-20",
+      "accountId": ""
+    }
+  ],
   "accounts": [],
   "budgets": [],
   "goals": [],
